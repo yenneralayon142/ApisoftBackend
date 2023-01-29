@@ -14,13 +14,13 @@ namespace Services
         private readonly Lazy<ITypeDocumentService> _typeDocumentService;
         private readonly Lazy<ICategoryVehicleService> _categoryVehicleService;
         private readonly Lazy<IStatusVehicleService> _statusVehicleService;
-
         private readonly Lazy<IServiceService> _serviceService;
         private readonly Lazy<IRepairService> _repairService;
-
         private readonly Lazy<IBrandService> _brandService;
         private readonly Lazy<IPriceServiceCategoryService> _categoryService;
-        
+        private readonly Lazy<IUserService> _userService;
+        private readonly Lazy<IClientService> _clientService;
+
 
 
 
@@ -34,29 +34,23 @@ namespace Services
             _repairService = new Lazy<IRepairService>(()=> new RepairService(repositoryManager,loggerManager, mapper));
             _brandService = new Lazy<IBrandService>(() => new BrandService(repositoryManager,loggerManager, mapper));
             _categoryService = new Lazy<IPriceServiceCategoryService>(() => new PriceServiceCategoryService(repositoryManager, loggerManager, mapper));
-            
+            _userService = new Lazy<IUserService>(() => new UserService(repositoryManager, mapper, loggerManager));
+            _clientService = new Lazy<IClientService>(() => new ClientService(repositoryManager, loggerManager, mapper));
+
+
 
             this._repositoryWrapper = repositoryManager;
         }
 
         public ITypeDocumentService TypeDocumentService => _typeDocumentService.Value;
-
         public ICategoryVehicleService CategoryVehicleService => _categoryVehicleService.Value;
         public IStatusVehicleService StatusVehicleService => _statusVehicleService.Value;
-
-
         public IServiceService ServiceService => _serviceService.Value;
-
         public IRepairService RepairService => _repairService.Value;
-
-
         public IBrandService BrandService => _brandService.Value;
-
         public IPriceServiceCategoryService PriceServiceCategoryService => _categoryService.Value;
-
-       
-
-
+        public IUserService UserService => _userService.Value;
+        public IClientService ClientService => _clientService.Value;
         public async Task Save() => await _repositoryWrapper.SaveAsync();
 
     }

@@ -12,8 +12,9 @@ namespace ServiceContracts
         ICategoryVehicleService CategoryVehicleService { get; }
         IStatusVehicleService StatusVehicleService { get; }
         IBrandService BrandService { get; }
-
+        IUserService UserService { get; }
         IServiceService ServiceService { get; }
+        IClientService ClientService { get; }
         IRepairService RepairService { get; }
 
         IPriceServiceCategoryService PriceServiceCategoryService { get; }

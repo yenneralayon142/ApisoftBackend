@@ -1,5 +1,6 @@
 ﻿using Contracts.Repositories;
 using Entities.Models;
+using Microsoft.EntityFrameworkCore;
 using Repository.Configuration;
 using Repository.Contexts;
 using System;
@@ -16,12 +17,11 @@ namespace Repository.Tables
         {
         }
 
-        public IEnumerable<Client> GetAll(bool trackChanges)
+        public async Task<IEnumerable<Client>> GetAllAsync(bool trackChanges)
         {
-            return FindAll(trackChanges).ToList();
+            return await FindAll(trackChanges).ToListAsync();
         }
-
-        public Client GetById(int id, bool trackChanges) => FindByCondition(x => x.DocumentNum.Equals(id), trackChanges).FirstOrDefault();
+        public async Task<Client> GetByIdAsync(int id, bool trackChanges) => await FindByCondition(x => x.DocumentNum.Equals(id), trackChanges).FirstOrDefaultAsync();
 
         public void CreateClient(Client client) => Create(client);
         public void UpdateClient(Client client) => Update(client);

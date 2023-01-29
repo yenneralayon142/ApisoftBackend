@@ -16,6 +16,13 @@ namespace ApisoftBackend
             CreateMap<Repair,RepairDTO>();
             CreateMap<Service, ServiceDTO>();
             CreateMap<PriceServiceCategory,PriceServiceCategoryDTO>();
+            CreateMap<StatusVehicle, StatusVehicleDTO>();
+            CreateMap<Service, ServiceDTO>();
+            CreateMap<User, UserDTO>();
+            CreateMap<Client, ClientDTO>();
+            CreateMap<StatusVehicle, StatusVehicleDTO>();            
+            CreateMap<Repair,RepairDTO>();
+            CreateMap<Service, ServiceDTO>();
 
         }
     }

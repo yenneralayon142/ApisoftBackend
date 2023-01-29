@@ -34,7 +34,7 @@ namespace Presentation.Controllers
         // POST api/<TypeDocumentController>
 
         [HttpPost]
-        public async Task<IActionResult> Create( TypeDocument typedocument)
+        public async Task<IActionResult> Post( TypeDocument typedocument)
         {
             _service.TypeDocumentService.CreateTypeDocument(typedocument);
             await _service.Save();

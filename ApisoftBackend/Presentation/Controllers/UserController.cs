@@ -1,69 +1,68 @@
-﻿//using System.Collections;
-//using Contracts;
-//using Entities.Models;
-//using Microsoft.AspNetCore.Http;
-//using Microsoft.AspNetCore.Mvc;
+﻿using System.Collections;
+using Contracts;
+using Entities.Models;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using ServiceContracts;
 
-//namespace Presentation.Controllers
-//{
-//    [Route("api/[controller]")]
-//    [ApiController]
-//    public class UserController : ControllerBase
-//    {
-//        private IRepositoryWrapper _repository;
+namespace Presentation.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class UserController : ControllerBase
+    {
+        private IServiceManager _service;
 
-//        public UserController(IRepositoryWrapper repository)
-//        {
-//            _repository = repository;
-//        }
+        public UserController(IServiceManager service)
+        {
+            _service = service;
+        }
 
-//        // GET: api/<UserController>
-//        [HttpGet]
-//        public IEnumerable<User> GetUser()
-//        {
-//            return _repository.User.GetAll(false);
-//        }
+        // GET: api/<UserController>
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            return Ok(await _service.UserService.GetAll(false));
+        }
 
-//        //GET: api/<UserController>
-//        [HttpGet("{id}")]
-//        public User GetById(int id)
-//        {
-//            return _repository.User.GetById(id, false);
-//        }
+        //GET: api/<UserController>
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            return Ok(await _service.UserService.GetById(id, false));
+        }
 
-//        //POST api/<UserController>
-//        [HttpPost]
-//        public string Store([FromBody] User user)
-//        {
-//            _repository.User.Create(user);
-//            _repository.Save();
+        //POST api/<UserController>
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody] User user)
+        {
+            _service.UserService.CreateUser(user);
+            await _service.Save();
 
-//            return "Created Successfully";
-//        }
+            return Ok("Created Successfully");
+        }
 
-//        //PUT api/<UserController>
-//        [HttpPut("{id}")]
-//        public User Put(string id, [FromBody] User user)
-//        {
-//            if (ModelState.IsValid)
-//            {
-//                _repository.User.Update(user);
-//                _repository.Save();
-//            }
+        //PUT api/<UserController>
+        [HttpPut("{id}")]
+        public async Task<User> Put(string id, [FromBody] User user)
+        {
+            if (ModelState.IsValid)
+            {
+                _service.UserService.UpdateUser(user);
+                await _service.Save();
+            }
 
-//            return user;
-//        }
+            return user;
+        }
 
-//        //DELETE api/<UserController>
-//        [HttpDelete("{id}")]
-//        public string Delete(string id, User user)
-//        {
-//            _repository.User.Delete(user);
-//            _repository.Save();
+        //DELETE api/<UserController>
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(string id, User user)
+        {
+            _service.UserService.DeleteUser(user);
+            await _service.Save();
 
-//            return "Deleted Successfully";
-//        }
-
-
-//    }
-//}
+            return Ok("Deleted Successfully");
+        }
+    }
+}

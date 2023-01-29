@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Contracts.Repositories;
 using Entities.Models;
+using Microsoft.EntityFrameworkCore;
 using Repository.Configuration;
 using Repository.Contexts;
 
@@ -16,18 +17,14 @@ namespace Repository.Tables
         {
         }
 
-        public IEnumerable<User> GetAll(bool trackChanges)
+        public async Task<IEnumerable<User>> GetAllAsync(bool trackChanges)
         {
-            return FindAll(trackChanges).ToList();
+            return await FindAll(trackChanges).ToListAsync();
         }
 
-        public User GetById(int id, bool trackChanges) => FindByCondition(x => x.DocumentNumU.Equals(id), trackChanges).FirstOrDefault();
-
-
+        public async Task<User> GetByIdAsync(int id, bool trackChanges) => await FindByCondition(x => x.DocumentNumU.Equals(id), trackChanges).FirstOrDefaultAsync();
         public void CreateUser(User user) => Create(user);
-
         public void DeleteUser(User user) => Delete(user);
-
         public void UpdateUser(User user) => Update(user);
 
     }
