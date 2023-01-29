@@ -19,6 +19,7 @@ namespace Services
         private readonly Lazy<IBrandService> _brandService;
         private readonly Lazy<IUserService> _userService;
         private readonly Lazy<IClientService> _clientService;
+        private readonly Lazy<IVehicleService> _vehicleService;
 
 
 
@@ -28,15 +29,13 @@ namespace Services
             _typeDocumentService = new Lazy<ITypeDocumentService>(() => new TypeDocumentService(repositoryManager, loggerManager, mapper));
             _categoryVehicleService = new Lazy<ICategoryVehicleService>(() => new CategoryVehicleService(repositoryManager, loggerManager, mapper));
             _statusVehicleService = new Lazy<IStatusVehicleService>(() => new StatusVehicleService(repositoryManager, loggerManager, mapper));
-
             _serviceService = new Lazy<IServiceService>(() => new ServiceService(repositoryManager, loggerManager, mapper));
             _repairService = new Lazy<IRepairService>(()=> new RepairService(repositoryManager,loggerManager, mapper));
-
             _brandService = new Lazy<IBrandService>(() => new BrandService(repositoryManager,loggerManager, mapper));
             _serviceService = new Lazy<IServiceService>(() => new ServiceService(repositoryManager, loggerManager, mapper));
-
             _userService = new Lazy<IUserService>(() => new UserService(repositoryManager, mapper, loggerManager));
             _clientService = new Lazy<IClientService>(() => new ClientService(repositoryManager, loggerManager, mapper));
+            _vehicleService = new Lazy<IVehicleService>(() => new VehicleService(repositoryManager, loggerManager, mapper));
 
 
             this._repositoryWrapper = repositoryManager;
@@ -50,6 +49,7 @@ namespace Services
         public IBrandService BrandService => _brandService.Value;
         public IUserService UserService => _userService.Value;
         public IClientService ClientService => _clientService.Value;
+        public IVehicleService VehicleService => _vehicleService.Value;
 
         public async Task Save() => await _repositoryWrapper.SaveAsync();
 

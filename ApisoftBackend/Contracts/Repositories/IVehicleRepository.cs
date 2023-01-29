@@ -9,8 +9,8 @@ namespace Contracts.Repositories
 {
     public interface IVehicleRepository : IRepositoryBase<Vehicle>
     {
-        IEnumerable<Vehicle> GetAll(bool trackChanges);
-        Vehicle GetById(string id, bool trackChanges);
+        Task<IEnumerable<Vehicle>> GetAllAsync(bool trackChanges);
+        Task<Vehicle> GetByIdAsync(string id, bool trackChanges);
         void CreateVehicle(Vehicle vehicle);
         void DeleteVehicle(Vehicle vehicle);
         void UpdateVehicle(Vehicle vehicle);
