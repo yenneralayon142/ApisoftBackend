@@ -16,7 +16,7 @@ namespace ServiceContracts
         IServiceService ServiceService { get; }
         IClientService ClientService { get; }
         IRepairService RepairService { get; }
-
+        IVehicleService VehicleService { get; }
         IPriceServiceCategoryService PriceServiceCategoryService { get; }
 
         Task Save();

@@ -23,7 +23,7 @@ namespace ApisoftBackend
             CreateMap<StatusVehicle, StatusVehicleDTO>();            
             CreateMap<Repair,RepairDTO>();
             CreateMap<Service, ServiceDTO>();
-
+            CreateMap<Vehicle, VehicleDTO>();
         }
     }
 }
