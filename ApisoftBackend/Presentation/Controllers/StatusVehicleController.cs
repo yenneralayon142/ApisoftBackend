@@ -1,66 +1,67 @@
-﻿//using Contracts;
-//using Entities.Models;
-//using Microsoft.AspNetCore.Mvc;
+﻿using Contracts;
+using Entities.Models;
+using Microsoft.AspNetCore.Mvc;
+using ServiceContracts;
 
-//// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-//namespace Presentation.Controllers
-//{
-//    [Route("api/[controller]")]
-//    [ApiController]
-//    public class StatusVehicleController : ControllerBase
-//    {
-//        private IRepositoryWrapper _repository;
-//        public StatusVehicleController(IRepositoryWrapper repository)
-//        {
-//            _repository = repository;
-//        }
-    
-//        // GET: api/<StatusVehicleController>
-//        [HttpGet]
-//        public IEnumerable<StatusVehicle> GetStatus()
-//        {
-//            return _repository.StatusVehicle.GetAll(false);
-//        }
+namespace Presentation.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class StatusVehicleController : ControllerBase
+    {
+        private IServiceManager _service;
+        public StatusVehicleController(IServiceManager service)
+        {
+            _service = service;
+        }
 
-//        // GET api/<StatusVehicleController>/5
-//        [HttpGet("{id}")]
-//        public StatusVehicle Get(int id)
-//        {
-//            return _repository.StatusVehicle.GetById(id, false);
-//        }
+        // GET: api/<StatusVehicleController>
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            return Ok(await _service.StatusVehicleService.GetVehiclesAsync(false));
+        }
 
-//        // POST api/<StatusVehicleController>
-//        [HttpPost]
-//        public string Store([FromBody] StatusVehicle status)
-//        {
-//            _repository.StatusVehicle.Create(status);
-//            _repository.Save();
+        // GET api/<StatusVehicleController>/5
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {            
+            return Ok(await _service.StatusVehicleService.GetByIdAsync(id, false));
+        }
 
-//            return "Created SUccessfully";
-//        }
+        // POST api/<StatusVehicleController>
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody] StatusVehicle status)
+        {
+            _service.StatusVehicleService.CreateStatusVehicle(status);
+            await _service.Save();
 
-//        // PUT api/<StatusVehicleController>/5
-//        [HttpPut("{id}")]
-//        public StatusVehicle Put(int id, [FromBody] StatusVehicle status)
-//        {
-//            if (ModelState.IsValid)
-//            {
-//                _repository.StatusVehicle.Update(status);
-//                _repository.Save();
-//            }
+            return Ok("Created SUccessfully");
+        }
 
-//            return status;
-//        }
+        // PUT api/<StatusVehicleController>/5
+        [HttpPut("{id}")]
+        public async Task<StatusVehicle> Put(int id, [FromBody] StatusVehicle status)
+        {
+            if (ModelState.IsValid)
+            {
+                _service.StatusVehicleService.UpdateStatusVehicle(status);
+                await _service.Save();
+            }
 
-//        // DELETE api/<StatusVehicleController>/5
-//        [HttpDelete("{id}")]
-//        public string Delete(int id, StatusVehicle status)
-//        {
-//            _repository.StatusVehicle.Delete(status);
-//            _repository.Save();
+            return status;
+        }
 
-//            return "Deleted Successfully";
-//        }
-//    }
-//}
+        // DELETE api/<StatusVehicleController>/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id, StatusVehicle status)
+        {
+            _service.StatusVehicleService.DeleteStatusVehicle(status);
+            await _service.Save();
+
+            return Ok("Deleted Successfully");
+        }
+    }
+}

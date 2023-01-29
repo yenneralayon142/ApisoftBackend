@@ -9,6 +9,8 @@ namespace ServiceContracts
     public interface IServiceManager
     {
         ITypeDocumentService TypeDocumentService { get; }
+        ICategoryVehicleService CategoryVehicleService { get; }
+        IStatusVehicleService StatusVehicleService { get; }
 
         Task Save();
     }

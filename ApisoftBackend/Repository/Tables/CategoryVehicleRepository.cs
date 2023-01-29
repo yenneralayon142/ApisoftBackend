@@ -1,5 +1,6 @@
 ﻿using Contracts.Repositories;
 using Entities.Models;
+using Microsoft.EntityFrameworkCore;
 using Repository.Configuration;
 using Repository.Contexts;
 using System;
@@ -15,11 +16,11 @@ namespace Repository.Tables
         public CategoryVehicleRepository(AppDbContext context) : base(context)
         {
         }
-        public IEnumerable<CategoryVehicle> GetAll(bool trackChanges)
+        public async Task<IEnumerable<CategoryVehicle>> GetAllAsync(bool trackChanges)
         {
-            return FindAll(trackChanges).ToList();
+            return await FindAll(trackChanges).ToListAsync();
         }
-        public CategoryVehicle GetById(int id, bool trackChanges) => FindByCondition(x => x.CategoryVehicleId.Equals(id), trackChanges).FirstOrDefault();
+        public async Task<CategoryVehicle> GetByIdAsync(int id, bool trackChanges) => await FindByCondition(x => x.CategoryVehicleId.Equals(id), trackChanges).FirstOrDefaultAsync();
         public void CreateCategory(CategoryVehicle category) => Create(category);
         public void DeleteCategory(CategoryVehicle category) => Delete(category);
         public void UpdateCategory(CategoryVehicle category) => Update(category);

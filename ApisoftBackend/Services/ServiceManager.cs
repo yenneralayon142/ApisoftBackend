@@ -12,6 +12,8 @@ namespace Services
     public sealed class ServiceManager : IServiceManager
     {
         private readonly Lazy<ITypeDocumentService> _typeDocumentService;
+        private readonly Lazy<ICategoryVehicleService> _categoryVehicleService;
+        private readonly Lazy<IStatusVehicleService> _statusVehicleService;
 
 
 
@@ -19,12 +21,15 @@ namespace Services
         public ServiceManager(IRepositoryWrapper repositoryManager, ILoggerManager loggerManager,IMapper mapper)
         {
             _typeDocumentService = new Lazy<ITypeDocumentService>(() => new TypeDocumentService(repositoryManager, loggerManager, mapper));
-
+            _categoryVehicleService = new Lazy<ICategoryVehicleService>(() => new CategoryVehicleService(repositoryManager, loggerManager, mapper));
+            _statusVehicleService = new Lazy<IStatusVehicleService>(() => new StatusVehicleService(repositoryManager, loggerManager, mapper));
 
             this._repositoryWrapper = repositoryManager;
         }
 
         public ITypeDocumentService TypeDocumentService => _typeDocumentService.Value;
+        public ICategoryVehicleService CategoryVehicleService => _categoryVehicleService.Value;
+        public IStatusVehicleService StatusVehicleService => _statusVehicleService.Value;
 
         public async Task Save() => await _repositoryWrapper.SaveAsync();
 

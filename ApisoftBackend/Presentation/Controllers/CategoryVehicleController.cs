@@ -1,66 +1,67 @@
-﻿//using Contracts;
-//using Entities.Models;
-//using Microsoft.AspNetCore.Mvc;
+﻿using Contracts;
+using Entities.Models;
+using Microsoft.AspNetCore.Mvc;
+using ServiceContracts;
 
-//// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-//namespace Presentation.Controllers
-//{
-//    [Route("api/[controller]")]
-//    [ApiController]
-//    public class CategoryVehicleController : ControllerBase
-//    {
-//        private IRepositoryWrapper _repository;
-//        public CategoryVehicleController(IRepositoryWrapper repository)
-//        {
-//            _repository = repository;
-//        }
+namespace Presentation.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class CategoryVehicleController : ControllerBase
+    {
+        private IServiceManager _service;
+        public CategoryVehicleController(IServiceManager service)
+        {
+            _service = service;
+        }
 
-//        // GET: api/<CategoryVehicleController>
-//        [HttpGet]
-//        public IEnumerable<CategoryVehicle> GetCategories()
-//        {
-//            return _repository.CategoryVehicle.GetAll(false);
-//        }
+        // GET: api/<CategoryVehicleController>
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {            
+            return Ok(await _service.CategoryVehicleService.GetAll(false));
+        }
 
-//        // GET api/<CategoryVehicleController>/5
-//        [HttpGet("{id}")]
-//        public CategoryVehicle Get(int id)
-//        {
-//            return _repository.CategoryVehicle.GetById(id, false);
-//        }
+        // GET api/<CategoryVehicleController>/5
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {            
+            return Ok(await _service.CategoryVehicleService.GetById(id, false));
+        }
 
-//        // POST api/<CategoryVehicleController>
-//        [HttpPost]
-//        public string Store([FromBody] CategoryVehicle category)
-//        {
-//            _repository.CategoryVehicle.Create(category);
-//            _repository.Save();
+        // POST api/<CategoryVehicleController>
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody] CategoryVehicle category)
+        {
+            _service.CategoryVehicleService.CreateCategoryVehicle(category);
+            await _service.Save();
 
-//            return "Created Successfully";
-//        }
+            return Ok("Created Successfully");
+        }
 
-//        // PUT api/<CategoryVehicleController>/5
-//        [HttpPut("{id}")]
-//        public CategoryVehicle Put(int id, [FromBody] CategoryVehicle category)
-//        {
-//            if (ModelState.IsValid)
-//            {
-//                _repository.CategoryVehicle.Update(category);
-//                _repository.Save();
-//            }
+        // PUT api/<CategoryVehicleController>/5
+        [HttpPut("{id}")]
+        public async Task<CategoryVehicle> Put(int id, [FromBody] CategoryVehicle category)
+        {
+            if (ModelState.IsValid)
+            {
+                _service.CategoryVehicleService.UpdateCategoryVehicle(category);
+                await _service.Save();
+            }
 
-//            return category;
-//        }
+            return category;
+        }
 
-//        // DELETE api/<CategoryVehicleController>/5
-//        [HttpDelete("{id}")]
-//        public string Delete(int id, CategoryVehicle category)
-//        {
-//            _repository.CategoryVehicle.Delete(category);
-//            _repository.Save();
+        // DELETE api/<CategoryVehicleController>/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id, CategoryVehicle category)
+        {
+            _service.CategoryVehicleService.DeleteCategoryVehicle(category);
+            await _service.Save();
 
-//            return "Deleted Successfully";
-//        }
-//    }
-//}
+            return Ok("Deleted Successfully");
+        }
+    }
+}

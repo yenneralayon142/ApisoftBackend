@@ -5,7 +5,7 @@ namespace ServiceContracts
 {
     public interface ITypeDocumentService
     {
-        Task <IEnumerable <TypeDocumentDTO>> GetTypeDocumentsDTOs(bool trackChanges);
+        Task <IEnumerable<TypeDocumentDTO>> GetTypeDocumentsDTOs(bool trackChanges);
         Task <TypeDocumentDTO> GetByIdDto(string id, bool trackChanges);
 
         void CreateTypeDocument(TypeDocument typeDocument);

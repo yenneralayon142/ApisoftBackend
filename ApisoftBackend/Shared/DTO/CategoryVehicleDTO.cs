@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Shared.DTO
 {
-    public record TypeDocumentDTO
+    public record CategoryVehicleDTO
     (
-       string Type,
-       string Description 
+       string Name,
+       string Description
     );
 }

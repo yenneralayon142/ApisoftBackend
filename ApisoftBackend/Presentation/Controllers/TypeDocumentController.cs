@@ -19,23 +19,22 @@ namespace Presentation.Controllers
 
         // GET: api/<TypeDocumentController>
         [HttpGet]
-        public async Task < IActionResult> Get()
+        public async Task<IActionResult> Get()
         {
-            return  Ok(await _service.TypeDocumentService.GetTypeDocumentsDTOs(false));
+            return Ok(await _service.TypeDocumentService.GetTypeDocumentsDTOs(false));
         }
 
         // GET api/<TypeDocumentController>/5
         [HttpGet("{id}")]
-        public async Task <IActionResult> GetById(string id)
-        {
-            var type = await _service.TypeDocumentService.GetByIdDto(id, trackChanges:false);
-            return Ok(type);
+        public async Task<IActionResult> GetById(string id)
+        {           
+            return Ok(await _service.TypeDocumentService.GetByIdDto(id, trackChanges: false));
         }
 
         // POST api/<TypeDocumentController>
 
         [HttpPost]
-        public async Task <IActionResult> Create( TypeDocument typedocument)
+        public async Task<IActionResult> Create( TypeDocument typedocument)
         {
             _service.TypeDocumentService.CreateTypeDocument(typedocument);
             await _service.Save();
@@ -46,16 +45,13 @@ namespace Presentation.Controllers
         // PUT api/<TypeDocumentController>/5
 
         [HttpPut("{id}")]
-        public async Task <TypeDocument> Put(string id, [FromBody] TypeDocument typedocument)
+        public async Task<TypeDocument> Put(string id, [FromBody] TypeDocument typedocument)
         {
             if (ModelState.IsValid)
             {
-
-                _service.TypeDocumentService.UpdateTypeDocument(typedocument);
-               
+                _service.TypeDocumentService.UpdateTypeDocument(typedocument);               
                 await _service.Save();
             }
-
             return typedocument;
         }
 
