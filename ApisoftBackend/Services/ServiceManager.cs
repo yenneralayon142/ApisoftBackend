@@ -14,6 +14,7 @@ namespace Services
         private readonly Lazy<ITypeDocumentService> _typeDocumentService;
         private readonly Lazy<ICategoryVehicleService> _categoryVehicleService;
         private readonly Lazy<IStatusVehicleService> _statusVehicleService;
+        private readonly Lazy<IBrandService> _brandService;
 
 
 
@@ -23,6 +24,7 @@ namespace Services
             _typeDocumentService = new Lazy<ITypeDocumentService>(() => new TypeDocumentService(repositoryManager, loggerManager, mapper));
             _categoryVehicleService = new Lazy<ICategoryVehicleService>(() => new CategoryVehicleService(repositoryManager, loggerManager, mapper));
             _statusVehicleService = new Lazy<IStatusVehicleService>(() => new StatusVehicleService(repositoryManager, loggerManager, mapper));
+            _brandService = new Lazy<IBrandService>(() => new BrandService(repositoryManager,loggerManager, mapper));
 
             this._repositoryWrapper = repositoryManager;
         }
@@ -30,6 +32,7 @@ namespace Services
         public ITypeDocumentService TypeDocumentService => _typeDocumentService.Value;
         public ICategoryVehicleService CategoryVehicleService => _categoryVehicleService.Value;
         public IStatusVehicleService StatusVehicleService => _statusVehicleService.Value;
+        public IBrandService BrandService => _brandService.Value;
 
         public async Task Save() => await _repositoryWrapper.SaveAsync();
 

@@ -11,7 +11,8 @@ namespace ApisoftBackend
         {
             CreateMap<TypeDocument, TypeDocumentDTO>();
             CreateMap<CategoryVehicle, CategoryVehicleDTO>();
-            CreateMap<StatusVehicle, StatusVehicleDTO>();            
+            CreateMap<StatusVehicle, StatusVehicleDTO>();  
+            CreateMap<Brand, BrandDTO>();
         }
     }
 }
