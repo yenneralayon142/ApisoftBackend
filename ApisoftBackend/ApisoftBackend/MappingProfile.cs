@@ -10,8 +10,12 @@ namespace ApisoftBackend
         public MappingProfile()
         {
             CreateMap<TypeDocument, TypeDocumentDTO>();
+<<<<<<< HEAD
             CreateMap<CategoryVehicle, CategoryVehicleDTO>();
             CreateMap<StatusVehicle, StatusVehicleDTO>();            
+=======
+            CreateMap<Service, ServiceDTO>();
+>>>>>>> feature/YennerEdition
         }
     }
 }

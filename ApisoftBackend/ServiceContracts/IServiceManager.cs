@@ -12,6 +12,8 @@ namespace ServiceContracts
         ICategoryVehicleService CategoryVehicleService { get; }
         IStatusVehicleService StatusVehicleService { get; }
 
+        IServiceService ServiceService { get; }
+
         Task Save();
     }
 }
