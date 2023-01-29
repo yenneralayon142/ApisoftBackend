@@ -1,66 +1,67 @@
-﻿//using Contracts;
-//using Entities.Models;
-//using Microsoft.AspNetCore.Mvc;
+﻿using Contracts;
+using Entities.Models;
+using Microsoft.AspNetCore.Mvc;
+using ServiceContracts;
 
-//// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-//namespace Presentation.Controllers
-//{
-//    [Route("api/[controller]")]
-//    [ApiController]
-//    public class ServiceController : ControllerBase
-//    {
-//        private IRepositoryWrapper _repository;
-//        public ServiceController(IRepositoryWrapper repository)
-//        {
-//            _repository = repository;
-//        }
+namespace Presentation.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class ServiceController : ControllerBase
+    {
+        private IServiceManager _service;
+        public ServiceController(IServiceManager service)
+        {
+            _service = service;
+        }
 
-//        // GET: api/<ServiceController>
-//        [HttpGet]
-//        public IEnumerable<Service> GetServices()
-//        {
-//            return _repository.Service.GetAll(false);
-//        }
 
-//        // GET api/<ServiceController>/5
-//        [HttpGet("{id}")]
-//        public Service Get(int id)
-//        {
-//            return _repository.Service.GetById(id, false);
-//        }
+        // GET: api/<ServiceController>
+        [HttpGet]
+        public async Task <IActionResult> Get()
+        {
+            return Ok(await _service.ServiceService.GetServicesDTO(false));
+        }
 
-//        // POST api/<ServiceController>
-//        [HttpPost]
-//        public string Store([FromBody] Service service)
-//        {
-//            _repository.Service.Create(service);
-//            _repository.Save();
+        // GET api/<ServiceController>/5
+        [HttpGet("{id}")]
+        public async Task <IActionResult> GetById(int id)
+        {
+            return Ok(await _service.ServiceService.GetByIdDTO(id, trackChanges: false));
+        }
 
-//            return "Created Successfully";
-//        }
+        // POST api/<ServiceController>
+        [HttpPost]
+        public async Task <IActionResult> Create ( Service service)
+        {
+            _service.ServiceService.CreateService(service);
+            await _service.Save();
+            return Ok("Creado correctamente");
+        }
 
-//        // PUT api/<ServiceController>/5
-//        [HttpPut("{id}")]
-//        public Service Put(int id, [FromBody] Service service)
-//        {
-//            if (ModelState.IsValid)
-//            {
-//                _repository.Service.Update(service);
-//                _repository.Save();
-//            }
+        // PUT api/<ServiceController>/5
+        [HttpPut("{id}")]
+        public async Task <Service> Put(int id, [FromBody] Service service)
+        {
+            if (ModelState.IsValid)
+            {
+                _service.ServiceService.UpdateService(service);
+                await _service.Save();
+            }
 
-//            return service;
-//        }
+            return service;
+        }
 
-//        // DELETE api/<ServiceController>/5
-//        [HttpDelete("{id}")]
-//        public string Delete(int id, Service service)
-//        {
-//            _repository.Service.Delete(service);
-//            _repository.Save();
+        // DELETE api/<ServiceController>/5
+        [HttpDelete("{id}")]
+        public async Task <IActionResult> Delete(int id, Service service)
+        {
+            _service.ServiceService.DeleteService(service);
+            await _service.Save();
 
-//            return "Deleted Successfully";
-//        }
-//    }
-//}
+            return Ok("Eliminado correctamente");
+        }
+    }
+}

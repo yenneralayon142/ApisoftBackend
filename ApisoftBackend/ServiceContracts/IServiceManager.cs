@@ -10,6 +10,8 @@ namespace ServiceContracts
     {
         ITypeDocumentService TypeDocumentService { get; }
 
+        IServiceService ServiceService { get; }
+
         Task Save();
     }
 }
