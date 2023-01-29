@@ -1,5 +1,6 @@
 ﻿using Contracts.Repositories;
 using Entities.Models;
+using Microsoft.EntityFrameworkCore;
 using Repository.Configuration;
 using Repository.Contexts;
 using System;
@@ -16,12 +17,12 @@ namespace Repository.Tables
         {
         }
 
-        public IEnumerable<Repair> GetAll(bool trackChanges)
+        public async Task <IEnumerable<Repair>> GetAllAsync(bool trackChanges)
         {
-            return FindAll(trackChanges).ToList();
+            return await FindAll(trackChanges).ToListAsync();
         }
 
-        public Repair GetById(int id, bool trackChanges) => FindByCondition(x => x.RepairId.Equals(id), trackChanges).FirstOrDefault();
+        public async Task <Repair> GetByIdAsync(int id, bool trackChanges) => await FindByCondition(x => x.RepairId.Equals(id), trackChanges).FirstOrDefaultAsync();
 
         public void CreateRepair(Repair repair) => Create(repair);
         public void DeleteRepair(Repair repair) => Delete(repair);
