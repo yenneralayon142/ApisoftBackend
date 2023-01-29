@@ -39,7 +39,7 @@ namespace Presentation.Controllers
         {
             _service.TypeDocumentService.CreateTypeDocument(typedocument);
             await _service.Save();
-            return Ok("Viva el perico"); //Revisar retorno
+            return Ok("Creado correctamente"); //Revisar retorno
         }
 
 
@@ -66,7 +66,7 @@ namespace Presentation.Controllers
             _service.TypeDocumentService.DeleteTypeDocument(typedocument);
             await _service.Save();
 
-            return Ok();
+            return Ok("Eliminado correctamente");
         }
     }
 }
