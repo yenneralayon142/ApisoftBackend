@@ -13,6 +13,7 @@ namespace ServiceContracts
         IStatusVehicleService StatusVehicleService { get; }
 
         IServiceService ServiceService { get; }
+        IRepairService RepairService { get; }
 
         Task Save();
     }
