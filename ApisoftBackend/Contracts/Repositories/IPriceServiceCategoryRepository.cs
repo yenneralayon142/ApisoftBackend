@@ -9,8 +9,8 @@ namespace Contracts.Repositories
 {
     public interface IPriceServiceCategoryRepository : IRepositoryBase<PriceServiceCategory>
     {
-        IEnumerable<PriceServiceCategory> GetAll(bool trackChanges);
-        PriceServiceCategory GetById(int id, bool trackChanges);
+        Task <IEnumerable<PriceServiceCategory>> GetAllAsync (bool trackChanges);
+        Task <PriceServiceCategory> GetByIdAsync(int id, bool trackChanges);
         void CreatePriceServiceCategory(PriceServiceCategory priceservicecategory);
         void DeletePriceServiceCategory(PriceServiceCategory priceservicecategory);
         void UpdatePriceServiceCategory(PriceServiceCategory priceservicecategory);

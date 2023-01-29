@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Contracts.Repositories;
 using Entities.Models;
+using Microsoft.EntityFrameworkCore;
 using Repository.Configuration;
 using Repository.Contexts;
 
@@ -16,12 +17,12 @@ namespace Repository.Tables
         {
         }
 
-        public IEnumerable<PriceServiceCategory> GetAll(bool trackChanges)
+        public async Task <IEnumerable<PriceServiceCategory>> GetAllAsync(bool trackChanges)
         {
-            return FindAll(trackChanges).ToList();
+            return await FindAll(trackChanges).ToListAsync();
         }
 
-        public PriceServiceCategory GetById(int id, bool trackChanges) => FindByCondition(x => x.PriceServiceCategoryId.Equals(id), trackChanges).FirstOrDefault();
+        public async Task <PriceServiceCategory> GetByIdAsync(int id, bool trackChanges) => await  FindByCondition(x => x.PriceServiceCategoryId.Equals(id), trackChanges).FirstOrDefaultAsync();
 
 
         public void CreatePriceServiceCategory(PriceServiceCategory priceservicecategory) => Create(priceservicecategory);
@@ -31,6 +32,7 @@ namespace Repository.Tables
      
 
         public void UpdatePriceServiceCategory(PriceServiceCategory priceservicecategory) => Update(priceservicecategory);
+
        
     }
 }

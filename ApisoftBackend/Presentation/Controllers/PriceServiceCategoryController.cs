@@ -1,66 +1,65 @@
-﻿//using Contracts;
-//using Entities.Models;
-//using Microsoft.AspNetCore.Http;
-//using Microsoft.AspNetCore.Mvc;
+﻿using Contracts;
+using Entities.Models;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using ServiceContracts;
 
-//namespace Presentation.Controllers
-//{
-//    [Route("api/[controller]")]
-//    [ApiController]
-//    public class PriceServiceCategoryController : ControllerBase
-//    {
-//        private IRepositoryWrapper _repository;
+namespace Presentation.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class PriceServiceCategoryController : ControllerBase
+    {
+        private IServiceManager _service;
+        public PriceServiceCategoryController(IServiceManager service)
+        {
+            _service = service;
+        }
 
-//        public PriceServiceCategoryController(IRepositoryWrapper repository)
-//        {
-//            _repository = repository;
-//        }
+        //GET: api/<ClientController>
+        [HttpGet]
+        public async Task <IActionResult> Get()
+        {
+            return Ok(await _service.PriceServiceCategoryService.GetPriceServiceCategoryDTO(false));
+        }
+        //GET: api/<ClientController>
+        [HttpGet("{id}")]
+        public async Task <IActionResult> GetById(int id)
+        {
+            return Ok(await _service.PriceServiceCategoryService.GetByIdDTO(id,trackChanges:false));
+        }
 
-//        //GET: api/<ClientController>
-//        [HttpGet]
-//        public IEnumerable<PriceServiceCategory> GetPriceServiceCategory()
-//        {
-//            return _repository.PriceServiceCategory.GetAll(false);
-//        }
-//        //GET: api/<ClientController>
-//        [HttpGet("{id}")]
-//        public PriceServiceCategory GetById(int id)
-//        {
-//            return _repository.PriceServiceCategory.GetById(id, false);
-//        }
+        //POST: api/<ClientController>
+        [HttpPost]
+        public async Task <IActionResult> Create(PriceServiceCategory priceServiceCategory)
+        {
+            _service.PriceServiceCategoryService.CreatePriceServiceCategory(priceServiceCategory);
+            await _service.Save();
+            return Ok("Creado correctamente");
+        }
 
-//        //POST: api/<ClientController>
-//        [HttpPost]
-//        public string Store([FromBody] PriceServiceCategory priceservicecategory)
-//        {
-//            _repository.PriceServiceCategory.Create(priceservicecategory);
-//            _repository.Save();
+        //PUT: api/<ClientController>
+        [HttpPut("{id}")]
+        public async Task < PriceServiceCategory> Put(int id, [FromBody] PriceServiceCategory priceservicecategory)
+        {
+            if (ModelState.IsValid)
+            {
+                _service.PriceServiceCategoryService.UpdatePriceServiceCategory(priceservicecategory);
+                await _service.Save();
+            }
 
-//            return "Created Successfully";
-//        }
+            return priceservicecategory;
+        }
 
-//        //PUT: api/<ClientController>
-//        [HttpPut("{id}")]
-//        public PriceServiceCategory Put(string id, [FromBody] PriceServiceCategory priceservicecategory)
-//        {
-//            if (ModelState.IsValid)
-//            {
-//                _repository.PriceServiceCategory.Update(priceservicecategory);
-//                _repository.Save();
-//            }
+        //DELETE: api/<ClientController>
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete (int id, PriceServiceCategory priceServiceCategory)
+        {
+            _service.PriceServiceCategoryService.DeletePriceServiceCategory(priceServiceCategory);
+            await _service.Save();
 
-//            return priceservicecategory;
-//        }
+            return Ok("Eliminado correctamente");
+        }
 
-//        //DELETE: api/<ClientController>
-//        [HttpDelete("{id}")]
-//        public string Delete(string id, PriceServiceCategory priceservicecategory)
-//        {
-//            _repository.PriceServiceCategory.Delete(priceservicecategory);
-//            _repository.Save();
-
-//            return "Deleted Successfully";
-//        }
-
-//    }
-//}
+    }
+}

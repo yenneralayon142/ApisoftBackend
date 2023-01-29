@@ -16,6 +16,8 @@ namespace ServiceContracts
         IServiceService ServiceService { get; }
         IRepairService RepairService { get; }
 
+        IPriceServiceCategoryService PriceServiceCategoryService { get; }
+
         Task Save();
     }
 }
