@@ -9,8 +9,8 @@ namespace Contracts.Repositories
 {
     public interface IClientRepository : IRepositoryBase<Client>
     {
-        IEnumerable<Client> GetAll(bool trackChanges);
-        Client GetById(int id, bool trackChanges);
+        Task<IEnumerable<Client>> GetAllAsync(bool trackChanges);
+        Task<Client> GetByIdAsync(int id, bool trackChanges);
         void CreateClient(Client client);
         void DeleteClient(Client client);
         void UpdateClient(Client client);
