@@ -9,8 +9,8 @@ namespace Contracts.Repositories
 {
     public interface IBrandRepository : IRepositoryBase<Brand>
     {
-        IEnumerable<Brand> GetAll(bool trackChanges);
-        Brand GetById(int id, bool trackChanges);
+        Task<IEnumerable<Brand>> GetAllAsync(bool trackChanges);
+        Task<Brand> GetByIdAsync(int id, bool trackChanges);
         void CreateBrand(Brand brand);
         void DeleteBrand(Brand brand);
         void UpdateBrand(Brand brand);
