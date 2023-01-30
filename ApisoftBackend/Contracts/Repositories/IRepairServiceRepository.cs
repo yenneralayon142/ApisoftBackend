@@ -9,8 +9,8 @@ namespace Contracts.Repositories
 {
     public interface IRepairServiceRepository : IRepositoryBase<RepairService>
     {
-        IEnumerable<RepairService> GetAll(bool trackChanges);
-        RepairService GetById(int id, bool trackChanges);
+        Task <IEnumerable<RepairService>> GetAllAsync(bool trackChanges);
+        Task <RepairService> GetByIdAsync(int id, bool trackChanges);
         void CreateRepairService(RepairService repairservice);
         void DeleteRepairService(RepairService repairservice);
         void UpdateRepairService(RepairService repairservice);

@@ -20,6 +20,7 @@ namespace Services
         private readonly Lazy<IPriceServiceCategoryService> _categoryService;
         private readonly Lazy<IUserService> _userService;
         private readonly Lazy<IClientService> _clientService;
+        private readonly Lazy<IRepairServiceService> _repairServiceService;
 
 
 
@@ -36,6 +37,7 @@ namespace Services
             _categoryService = new Lazy<IPriceServiceCategoryService>(() => new PriceServiceCategoryService(repositoryManager, loggerManager, mapper));
             _userService = new Lazy<IUserService>(() => new UserService(repositoryManager, mapper, loggerManager));
             _clientService = new Lazy<IClientService>(() => new ClientService(repositoryManager, loggerManager, mapper));
+            _repairServiceService = new Lazy<IRepairServiceService>(() => new RepairServiceService(repositoryManager, loggerManager, mapper));
 
 
 
@@ -51,6 +53,8 @@ namespace Services
         public IPriceServiceCategoryService PriceServiceCategoryService => _categoryService.Value;
         public IUserService UserService => _userService.Value;
         public IClientService ClientService => _clientService.Value;
+        public IRepairServiceService RepairServiceService => _repairServiceService.Value;
+
         public async Task Save() => await _repositoryWrapper.SaveAsync();
 
     }
