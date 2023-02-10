@@ -8,6 +8,7 @@ namespace Shared.DTO
 {
     public record ServiceDTO
     (
+        int ServiceId,
         string Name,
         string Description
     );
