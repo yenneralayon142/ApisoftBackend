@@ -38,7 +38,7 @@ namespace Presentation.Controllers
         {
             _service.TypeDocumentService.CreateTypeDocument(typedocument);
             await _service.Save();
-            return Ok("Creado correctamente"); //Revisar retorno
+            return Ok("Creado correctamente"); 
         }
 
 

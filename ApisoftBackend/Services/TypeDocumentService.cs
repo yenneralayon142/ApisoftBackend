@@ -13,13 +13,15 @@ namespace Services
         private readonly IRepositoryWrapper _repository;
         private readonly ILoggerManager _loggerManager;
         private readonly IMapper _mapper;
+       
 
         public TypeDocumentService(IRepositoryWrapper repository,ILoggerManager loggerManager,IMapper mapper)
         {
             this._repository = repository;
             this._mapper = mapper; 
             this._loggerManager = loggerManager;
-        }       
+        }
+
 
         public async Task <IEnumerable<TypeDocumentDTO>> GetTypeDocumentsDTOs(bool trackChanges)
         {
