@@ -8,6 +8,7 @@ namespace Shared.DTO
 {
     public record CategoryVehicleDTO
     (
+       int CategoryVehicleId,
        string Name,
        string Description
     );

@@ -8,6 +8,7 @@ namespace Shared.DTO
 {
     public record BrandDTO
         (
+            int BrandId,
             string Name,
             string Description
         );
