@@ -39,7 +39,7 @@ namespace Presentation.Controllers
             _service.BrandService.CreateBrand(brand);
             await _service.Save();
 
-            return Ok("Created Successfully");
+            return Ok("Creado correctamente");
         }
 
         // PUT api/<BrandController>/5
@@ -62,7 +62,7 @@ namespace Presentation.Controllers
             _service.BrandService.DeleteBrand(brand);
             await _service.Save();
 
-            return Ok("Deleted successfully");
+            return Ok("Eliminado correctamente");
         }
     }
 }
