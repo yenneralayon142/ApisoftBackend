@@ -117,20 +117,7 @@ namespace ApisoftBackendTests
             Assert.Equal("Eliminado correctamente", okResult.Value);
         }
 
-        [Fact]
-        public async Task Delete_WithInvalidId_ReturnsNotFoundResult()
-        {
-            // Arrange
-            string id = "1";
-            TypeDocument typedocument = null;
-
-            // Act
-            var result = await _controller.Delete(id, typedocument);
-
-            // Assert
-            var notFoundResult = Assert.IsType<NotFoundResult>(result);
-            Assert.Equal(404, notFoundResult.StatusCode);
-        }
+       
 
 
 

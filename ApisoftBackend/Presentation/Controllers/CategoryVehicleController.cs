@@ -38,7 +38,7 @@ namespace Presentation.Controllers
             _service.CategoryVehicleService.CreateCategoryVehicle(category);
             await _service.Save();
 
-            return Ok("Created Successfully");
+            return Ok("Creado correctamente");
         }
 
         // PUT api/<CategoryVehicleController>/5
@@ -61,7 +61,7 @@ namespace Presentation.Controllers
             _service.CategoryVehicleService.DeleteCategoryVehicle(category);
             await _service.Save();
 
-            return Ok("Deleted Successfully");
+            return Ok("Eliminado correctamente");
         }
     }
 }
