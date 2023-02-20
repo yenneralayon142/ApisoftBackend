@@ -117,10 +117,13 @@ namespace ApisoftBackendTests
             Assert.Equal("Eliminado correctamente", okResult.Value);
         }
 
+<<<<<<< HEAD
        
 
 
 
+=======
+>>>>>>> 338603386a7572ecc9ce9ffc85b3199a69f7a0a1
     }
 
 

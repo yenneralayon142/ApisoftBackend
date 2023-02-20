@@ -39,7 +39,7 @@ namespace Presentation.Controllers
             _service.UserService.CreateUser(user);
             await _service.Save();
 
-            return Ok("Created Successfully");
+            return Ok("Creado correctamente");
         }
 
         //PUT api/<UserController>
@@ -62,7 +62,7 @@ namespace Presentation.Controllers
             _service.UserService.DeleteUser(user);
             await _service.Save();
 
-            return Ok("Deleted Successfully");
+            return Ok("Eliminado correctamente");
         }
     }
 }
